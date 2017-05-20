@@ -1,22 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Web;
 
 namespace AutoShop.Models
 {
-    public class Model
+    public class Wheel
     {
         public int Id { get; set; }
-        public string Name { get; set; }
 
-        public int? BrandId { get; set; }
-        public virtual Brand Brand { get; set; }
+        public int? TireId { get; set; }
+        public virtual Tire Tire { get; set; }
+
+        public int? RimId { get; set; }
+        public virtual Rim Rim { get; set; }
 
         public ICollection<Car> Cars { get; set; }
 
-        public Model()
+        public Wheel()
         {
             Cars = new List<Car>();
         }
