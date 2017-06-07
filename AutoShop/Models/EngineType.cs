@@ -5,16 +5,16 @@ using System.Web;
 
 namespace AutoShop.Models
 {
-    public class Body
+    public class EngineType
     {
         public int Id { get; set; }
         public string Type { get; set; }
 
-        public ICollection<Car> Cars { get; set; }
+        public ICollection<Engine> Engines { get; set; }
 
-        public Body()
+        public EngineType()
         {
-            Cars = new List<Car>();
+            Engines = new List<Engine>();
         }
     }
 }

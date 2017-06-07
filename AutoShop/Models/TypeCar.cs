@@ -5,18 +5,14 @@ using System.Web;
 
 namespace AutoShop.Models
 {
-    public class Engine
+    public class TypeCar
     {
         public int Id { get; set; }
-        public int Power { get; set; }
-        public int? Volume { get; set; }
-
-        public int? EngineTypeId { get; set; }
-        public virtual EngineType EngineType { get; set; }
+        public string Type { get; set; }
 
         public ICollection<Car> Cars { get; set; }
 
-        public Engine()
+        public TypeCar()
         {
             Cars = new List<Car>();
         }

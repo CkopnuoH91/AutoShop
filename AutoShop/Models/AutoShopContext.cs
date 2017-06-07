@@ -18,11 +18,13 @@ namespace AutoShop.Models
         public DbSet<Model> Models { get; set; }
 
         public DbSet<Engine> Engines { get; set; }
-        public DbSet<Body>  Bodies { get; set; }
+        public DbSet<EngineType> EngineTypes { get; set; }
 
-        public DbSet<Wheel> Wheels { get; set; }
-        public DbSet<Rim> Rims { get; set; }
-        public DbSet<Tire> Tires { get; set; }
+        public DbSet<Body> Bodies { get; set; }
 
+        public DbSet<DriveType> DriveTypes { get; set; }
+
+        public DbSet<TypeCar> TypesOfCar { get; set; }
+        public DbSet<Car> Cars { get; set; }
     }
 }
