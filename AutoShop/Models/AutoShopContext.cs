@@ -12,6 +12,7 @@ namespace AutoShop.Models
         public AutoShopContext() 
             : base("AutoShopDbConnection")
         {
+            Configuration.ProxyCreationEnabled = false;
         }
 
         public DbSet<Brand> Brands { get; set; }

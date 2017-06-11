@@ -9,50 +9,50 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using AutoShop.Models;
-using System.Web.Http.OData.Query;
 using System.Web.Http.OData;
+using System.Web.Http.OData.Query;
 
 namespace AutoShop.Controllers
 {
-    public class BodiesController : ApiController
+    public class EngineTypesController : ApiController
     {
         private AutoShopContext db = new AutoShopContext();
 
-        // GET: api/Bodies
+        // GET: api/EngineTypes
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
-        public IQueryable<Body> GetBodies()
+        public IQueryable<EngineType> GetEngineTypes()
         {
-            return db.Bodies;
+            return db.EngineTypes;
         }
 
-        // GET: api/Bodies/5
-        [ResponseType(typeof(Body))]
-        public IHttpActionResult GetBody(int id)
+        // GET: api/EngineTypes/5
+        [ResponseType(typeof(EngineType))]
+        public IHttpActionResult GetEngineType(int id)
         {
-            Body body = db.Bodies.Find(id);
-            if (body == null)
+            EngineType engineType = db.EngineTypes.Find(id);
+            if (engineType == null)
             {
                 return NotFound();
             }
 
-            return Ok(body);
+            return Ok(engineType);
         }
 
-        // PUT: api/Bodies/5
+        // PUT: api/EngineTypes/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutBody(int id, Body body)
+        public IHttpActionResult PutEngineType(int id, EngineType engineType)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != body.Id)
+            if (id != engineType.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(body).State = EntityState.Modified;
+            db.Entry(engineType).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace AutoShop.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BodyExists(id))
+                if (!EngineTypeExists(id))
                 {
                     return NotFound();
                 }
@@ -73,35 +73,35 @@ namespace AutoShop.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Bodies
-        [ResponseType(typeof(Body))]
-        public IHttpActionResult PostBody(Body body)
+        // POST: api/EngineTypes
+        [ResponseType(typeof(EngineType))]
+        public IHttpActionResult PostEngineType(EngineType engineType)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Bodies.Add(body);
+            db.EngineTypes.Add(engineType);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = body.Id }, body);
+            return CreatedAtRoute("DefaultApi", new { id = engineType.Id }, engineType);
         }
 
-        // DELETE: api/Bodies/5
-        [ResponseType(typeof(Body))]
-        public IHttpActionResult DeleteBody(int id)
+        // DELETE: api/EngineTypes/5
+        [ResponseType(typeof(EngineType))]
+        public IHttpActionResult DeleteEngineType(int id)
         {
-            Body body = db.Bodies.Find(id);
-            if (body == null)
+            EngineType engineType = db.EngineTypes.Find(id);
+            if (engineType == null)
             {
                 return NotFound();
             }
 
-            db.Bodies.Remove(body);
+            db.EngineTypes.Remove(engineType);
             db.SaveChanges();
 
-            return Ok(body);
+            return Ok(engineType);
         }
 
         protected override void Dispose(bool disposing)
@@ -113,9 +113,9 @@ namespace AutoShop.Controllers
             base.Dispose(disposing);
         }
 
-        private bool BodyExists(int id)
+        private bool EngineTypeExists(int id)
         {
-            return db.Bodies.Count(e => e.Id == id) > 0;
+            return db.EngineTypes.Count(e => e.Id == id) > 0;
         }
     }
 }

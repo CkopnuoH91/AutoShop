@@ -9,50 +9,50 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using AutoShop.Models;
-using System.Web.Http.OData.Query;
 using System.Web.Http.OData;
+using System.Web.Http.OData.Query;
 
 namespace AutoShop.Controllers
 {
-    public class BodiesController : ApiController
+    public class DriveTypesController : ApiController
     {
         private AutoShopContext db = new AutoShopContext();
 
-        // GET: api/Bodies
+        // GET: api/DriveTypes
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
-        public IQueryable<Body> GetBodies()
+        public IQueryable<DriveType> GetDriveTypes()
         {
-            return db.Bodies;
+            return db.DriveTypes;
         }
 
-        // GET: api/Bodies/5
-        [ResponseType(typeof(Body))]
-        public IHttpActionResult GetBody(int id)
+        // GET: api/DriveTypes/5
+        [ResponseType(typeof(DriveType))]
+        public IHttpActionResult GetDriveType(int id)
         {
-            Body body = db.Bodies.Find(id);
-            if (body == null)
+            DriveType driveType = db.DriveTypes.Find(id);
+            if (driveType == null)
             {
                 return NotFound();
             }
 
-            return Ok(body);
+            return Ok(driveType);
         }
 
-        // PUT: api/Bodies/5
+        // PUT: api/DriveTypes/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutBody(int id, Body body)
+        public IHttpActionResult PutDriveType(int id, DriveType driveType)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != body.Id)
+            if (id != driveType.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(body).State = EntityState.Modified;
+            db.Entry(driveType).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace AutoShop.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BodyExists(id))
+                if (!DriveTypeExists(id))
                 {
                     return NotFound();
                 }
@@ -73,35 +73,35 @@ namespace AutoShop.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Bodies
-        [ResponseType(typeof(Body))]
-        public IHttpActionResult PostBody(Body body)
+        // POST: api/DriveTypes
+        [ResponseType(typeof(DriveType))]
+        public IHttpActionResult PostDriveType(DriveType driveType)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Bodies.Add(body);
+            db.DriveTypes.Add(driveType);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = body.Id }, body);
+            return CreatedAtRoute("DefaultApi", new { id = driveType.Id }, driveType);
         }
 
-        // DELETE: api/Bodies/5
-        [ResponseType(typeof(Body))]
-        public IHttpActionResult DeleteBody(int id)
+        // DELETE: api/DriveTypes/5
+        [ResponseType(typeof(DriveType))]
+        public IHttpActionResult DeleteDriveType(int id)
         {
-            Body body = db.Bodies.Find(id);
-            if (body == null)
+            DriveType driveType = db.DriveTypes.Find(id);
+            if (driveType == null)
             {
                 return NotFound();
             }
 
-            db.Bodies.Remove(body);
+            db.DriveTypes.Remove(driveType);
             db.SaveChanges();
 
-            return Ok(body);
+            return Ok(driveType);
         }
 
         protected override void Dispose(bool disposing)
@@ -113,9 +113,9 @@ namespace AutoShop.Controllers
             base.Dispose(disposing);
         }
 
-        private bool BodyExists(int id)
+        private bool DriveTypeExists(int id)
         {
-            return db.Bodies.Count(e => e.Id == id) > 0;
+            return db.DriveTypes.Count(e => e.Id == id) > 0;
         }
     }
 }

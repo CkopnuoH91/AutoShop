@@ -9,50 +9,50 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using AutoShop.Models;
-using System.Web.Http.OData.Query;
 using System.Web.Http.OData;
+using System.Web.Http.OData.Query;
 
 namespace AutoShop.Controllers
 {
-    public class BodiesController : ApiController
+    public class ModelsController : ApiController
     {
         private AutoShopContext db = new AutoShopContext();
 
-        // GET: api/Bodies
+        // GET: api/Models
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
-        public IQueryable<Body> GetBodies()
+        public IQueryable<Model> GetModels()
         {
-            return db.Bodies;
+            return db.Models;
         }
 
-        // GET: api/Bodies/5
-        [ResponseType(typeof(Body))]
-        public IHttpActionResult GetBody(int id)
+        // GET: api/Models/5
+        [ResponseType(typeof(Model))]
+        public IHttpActionResult GetModel(int id)
         {
-            Body body = db.Bodies.Find(id);
-            if (body == null)
+            Model model = db.Models.Find(id);
+            if (model == null)
             {
                 return NotFound();
             }
 
-            return Ok(body);
+            return Ok(model);
         }
 
-        // PUT: api/Bodies/5
+        // PUT: api/Models/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutBody(int id, Body body)
+        public IHttpActionResult PutModel(int id, Model model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != body.Id)
+            if (id != model.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(body).State = EntityState.Modified;
+            db.Entry(model).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace AutoShop.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BodyExists(id))
+                if (!ModelExists(id))
                 {
                     return NotFound();
                 }
@@ -73,35 +73,35 @@ namespace AutoShop.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Bodies
-        [ResponseType(typeof(Body))]
-        public IHttpActionResult PostBody(Body body)
+        // POST: api/Models
+        [ResponseType(typeof(Model))]
+        public IHttpActionResult PostModel(Model model)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Bodies.Add(body);
+            db.Models.Add(model);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = body.Id }, body);
+            return CreatedAtRoute("DefaultApi", new { id = model.Id }, model);
         }
 
-        // DELETE: api/Bodies/5
-        [ResponseType(typeof(Body))]
-        public IHttpActionResult DeleteBody(int id)
+        // DELETE: api/Models/5
+        [ResponseType(typeof(Model))]
+        public IHttpActionResult DeleteModel(int id)
         {
-            Body body = db.Bodies.Find(id);
-            if (body == null)
+            Model model = db.Models.Find(id);
+            if (model == null)
             {
                 return NotFound();
             }
 
-            db.Bodies.Remove(body);
+            db.Models.Remove(model);
             db.SaveChanges();
 
-            return Ok(body);
+            return Ok(model);
         }
 
         protected override void Dispose(bool disposing)
@@ -113,9 +113,9 @@ namespace AutoShop.Controllers
             base.Dispose(disposing);
         }
 
-        private bool BodyExists(int id)
+        private bool ModelExists(int id)
         {
-            return db.Bodies.Count(e => e.Id == id) > 0;
+            return db.Models.Count(e => e.Id == id) > 0;
         }
     }
 }

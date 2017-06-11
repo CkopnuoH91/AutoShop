@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.OData;
 using System.Web.Http.Description;
 using AutoShop.Models;
 using Microsoft.VisualBasic.FileIO;
@@ -18,6 +19,7 @@ namespace AutoShop.Controllers
         private AutoShopContext db = new AutoShopContext();
 
         // GET: api/Brands
+        [EnableQuery(AllowedQueryOptions =System.Web.Http.OData.Query.AllowedQueryOptions.All)]
         public IQueryable<Brand> GetBrands()
         {
             //FillDataBase();           

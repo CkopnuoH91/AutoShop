@@ -14,45 +14,45 @@ using System.Web.Http.OData;
 
 namespace AutoShop.Controllers
 {
-    public class BodiesController : ApiController
+    public class EnginesController : ApiController
     {
         private AutoShopContext db = new AutoShopContext();
 
-        // GET: api/Bodies
+        // GET: api/Engines
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
-        public IQueryable<Body> GetBodies()
+        public IQueryable<Engine> GetEngines()
         {
-            return db.Bodies;
+            return db.Engines;
         }
 
-        // GET: api/Bodies/5
-        [ResponseType(typeof(Body))]
-        public IHttpActionResult GetBody(int id)
+        // GET: api/Engines/5
+        [ResponseType(typeof(Engine))]
+        public IHttpActionResult GetEngine(int id)
         {
-            Body body = db.Bodies.Find(id);
-            if (body == null)
+            Engine engine = db.Engines.Find(id);
+            if (engine == null)
             {
                 return NotFound();
             }
 
-            return Ok(body);
+            return Ok(engine);
         }
 
-        // PUT: api/Bodies/5
+        // PUT: api/Engines/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutBody(int id, Body body)
+        public IHttpActionResult PutEngine(int id, Engine engine)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != body.Id)
+            if (id != engine.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(body).State = EntityState.Modified;
+            db.Entry(engine).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace AutoShop.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BodyExists(id))
+                if (!EngineExists(id))
                 {
                     return NotFound();
                 }
@@ -73,35 +73,35 @@ namespace AutoShop.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Bodies
-        [ResponseType(typeof(Body))]
-        public IHttpActionResult PostBody(Body body)
+        // POST: api/Engines
+        [ResponseType(typeof(Engine))]
+        public IHttpActionResult PostEngine(Engine engine)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Bodies.Add(body);
+            db.Engines.Add(engine);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = body.Id }, body);
+            return CreatedAtRoute("DefaultApi", new { id = engine.Id }, engine);
         }
 
-        // DELETE: api/Bodies/5
-        [ResponseType(typeof(Body))]
-        public IHttpActionResult DeleteBody(int id)
+        // DELETE: api/Engines/5
+        [ResponseType(typeof(Engine))]
+        public IHttpActionResult DeleteEngine(int id)
         {
-            Body body = db.Bodies.Find(id);
-            if (body == null)
+            Engine engine = db.Engines.Find(id);
+            if (engine == null)
             {
                 return NotFound();
             }
 
-            db.Bodies.Remove(body);
+            db.Engines.Remove(engine);
             db.SaveChanges();
 
-            return Ok(body);
+            return Ok(engine);
         }
 
         protected override void Dispose(bool disposing)
@@ -113,9 +113,9 @@ namespace AutoShop.Controllers
             base.Dispose(disposing);
         }
 
-        private bool BodyExists(int id)
+        private bool EngineExists(int id)
         {
-            return db.Bodies.Count(e => e.Id == id) > 0;
+            return db.Engines.Count(e => e.Id == id) > 0;
         }
     }
 }

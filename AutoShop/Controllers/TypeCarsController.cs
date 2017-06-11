@@ -9,50 +9,50 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using AutoShop.Models;
-using System.Web.Http.OData.Query;
 using System.Web.Http.OData;
+using System.Web.Http.OData.Query;
 
 namespace AutoShop.Controllers
 {
-    public class BodiesController : ApiController
+    public class TypeCarsController : ApiController
     {
         private AutoShopContext db = new AutoShopContext();
 
-        // GET: api/Bodies
+        // GET: api/TypeCars
         [EnableQuery(AllowedQueryOptions = AllowedQueryOptions.All)]
-        public IQueryable<Body> GetBodies()
+        public IQueryable<TypeCar> GetTypesOfCar()
         {
-            return db.Bodies;
+            return db.TypesOfCar;
         }
 
-        // GET: api/Bodies/5
-        [ResponseType(typeof(Body))]
-        public IHttpActionResult GetBody(int id)
+        // GET: api/TypeCars/5
+        [ResponseType(typeof(TypeCar))]
+        public IHttpActionResult GetTypeCar(int id)
         {
-            Body body = db.Bodies.Find(id);
-            if (body == null)
+            TypeCar typeCar = db.TypesOfCar.Find(id);
+            if (typeCar == null)
             {
                 return NotFound();
             }
 
-            return Ok(body);
+            return Ok(typeCar);
         }
 
-        // PUT: api/Bodies/5
+        // PUT: api/TypeCars/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutBody(int id, Body body)
+        public IHttpActionResult PutTypeCar(int id, TypeCar typeCar)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != body.Id)
+            if (id != typeCar.Id)
             {
                 return BadRequest();
             }
 
-            db.Entry(body).State = EntityState.Modified;
+            db.Entry(typeCar).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace AutoShop.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BodyExists(id))
+                if (!TypeCarExists(id))
                 {
                     return NotFound();
                 }
@@ -73,35 +73,35 @@ namespace AutoShop.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Bodies
-        [ResponseType(typeof(Body))]
-        public IHttpActionResult PostBody(Body body)
+        // POST: api/TypeCars
+        [ResponseType(typeof(TypeCar))]
+        public IHttpActionResult PostTypeCar(TypeCar typeCar)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.Bodies.Add(body);
+            db.TypesOfCar.Add(typeCar);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = body.Id }, body);
+            return CreatedAtRoute("DefaultApi", new { id = typeCar.Id }, typeCar);
         }
 
-        // DELETE: api/Bodies/5
-        [ResponseType(typeof(Body))]
-        public IHttpActionResult DeleteBody(int id)
+        // DELETE: api/TypeCars/5
+        [ResponseType(typeof(TypeCar))]
+        public IHttpActionResult DeleteTypeCar(int id)
         {
-            Body body = db.Bodies.Find(id);
-            if (body == null)
+            TypeCar typeCar = db.TypesOfCar.Find(id);
+            if (typeCar == null)
             {
                 return NotFound();
             }
 
-            db.Bodies.Remove(body);
+            db.TypesOfCar.Remove(typeCar);
             db.SaveChanges();
 
-            return Ok(body);
+            return Ok(typeCar);
         }
 
         protected override void Dispose(bool disposing)
@@ -113,9 +113,9 @@ namespace AutoShop.Controllers
             base.Dispose(disposing);
         }
 
-        private bool BodyExists(int id)
+        private bool TypeCarExists(int id)
         {
-            return db.Bodies.Count(e => e.Id == id) > 0;
+            return db.TypesOfCar.Count(e => e.Id == id) > 0;
         }
     }
 }
